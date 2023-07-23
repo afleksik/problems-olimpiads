@@ -25,7 +25,7 @@ int Last(int *nums, int n, int target)
             low = mid + 1;
         }
     }
-    return result + 1;
+    return result;
 }
 
 
@@ -42,7 +42,10 @@ int main(){
 
     for (int j = 0; j < m; ++j){
         cin >> x_i;
-        cout << Last(A, n, x_i) << "\n";
+        if (A[Last(A, n, x_i)] == x_i)
+            cout << Last(A, n, x_i) + 1 << "\n";
+        else
+            cout << 0;
     }
     return 0;
 }
