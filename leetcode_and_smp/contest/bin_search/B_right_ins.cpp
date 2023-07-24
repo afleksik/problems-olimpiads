@@ -45,7 +45,7 @@ int main(){
         if (A[Last(A, n, x_i)] == x_i)
             cout << Last(A, n, x_i) + 1 << "\n";
         else
-            cout << 0;
+            cout << 0 << "\n";
     }
     return 0;
 }

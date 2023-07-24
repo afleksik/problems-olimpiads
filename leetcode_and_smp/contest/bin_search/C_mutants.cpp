@@ -14,6 +14,9 @@ int count(vector<int> ar, int n, int target){
 }
 
 int main(){
+    ios_base::sync_with_stdio(false);
+    cin.tie(nullptr);
+    cout.tie(nullptr);
     int n = 0;
     int col;
     int m;
@@ -30,4 +33,4 @@ int main(){
         cout << count(col_ar, n, req) << "\n";
     }
     return 0;
-}
+} 
