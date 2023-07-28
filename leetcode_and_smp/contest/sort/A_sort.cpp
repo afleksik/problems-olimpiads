@@ -1,19 +1,8 @@
 #include <iostream>
 #include <vector>
+#include <algorithm>
 
 using namespace std;
-
-
-vector<int> sort(vector<int> arr, int size) {
-	for (int i = size - 1; i > 0; --i) {
-    for (int j = 0; j < i; ++j) {
-		  if (arr[j + 1] < arr[j]) {
-		    std::swap(arr[j+1], arr[j]);
-      }
-    }	    
-	}
-	return arr;
-}
 
 
 int main(){
@@ -24,7 +13,7 @@ int main(){
         cin >> x;
         arr.push_back(x);
     }
-    arr = sort(arr, arr.size());
+    sort(arr.begin(), arr.end());
     for (int i = 0; i < n; ++i){
         cout << arr[i] << " ";
     }
