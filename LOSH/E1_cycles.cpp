@@ -1,67 +1,64 @@
 #include <bits/stdc++.h> 
 
 using namespace std;
+typedef long long ll;
 
-const int maxg = 100000;
+const int maxg = 100000 + 1;
+
 vector<int> graph[maxg];
-vector<string> visited(maxg, "white");
-bool flag = false;
+vector<int> visited;
 vector<int> res;
 
-void dfs(int v, int ans) {
-    if(flag)
-        return;
-    visited[v] = "grey";
+bool flag = false;
+
+void dfs(int v) {
+    visited[v] = 1;
     res.push_back(v);
-    for (int u : graph[v]) {
-        if (visited[u] == "white") {
-            dfs(u, ans);
-            if(flag) return;
-        }
-        else if (visited[u] == "grey"){
-            res.push_back(u);
+
+    for (int to: graph[v]) {
+        if (visited[to] == 0) {
+            dfs(to);
+        } else if (visited[to] == 1) {
             flag = true;
-            ans = u;
-            return;
-        }  
+
+            cout << "YES\n";
+            bool c = false;
+
+            for (int i = 0; i < res.size(); ++i) {
+                if (res[i] == to) {
+                    c = true;
+                }
+                if (c) {
+                    cout << res[i] << " ";
+                }
+
+            }
+            exit(0);
+        }
     }
-    visited[v] = "black";
+
+    visited[v] = 2;
     res.pop_back();
 }
 
-int main() {
-    int m, u_i, v_i, n;
-    cin >> n >> m;
-    for (int i = 0; i < m; ++i) {
-        cin >> u_i >> v_i;
-        --u_i;
-        --v_i;
-        graph[u_i].push_back(v_i);
-    }
 
-    int ans = 0;
+int main() {
+    int n, m, a, b;
+    cin >> n >> m;
+
+    visited.resize(n + 1);
+
+    for (int i = 0; i < m; ++i) {
+        cin >> a >> b;
+        graph[a].push_back(b);
+    }
 
     for (int i = 0; i < n; ++i) {
-        if (visited[i] == "white") {
-            dfs(i, ans);
-        }
-    }
-    if (flag) {
-        bool flag = true;
-        res.pop_back();
-        cout << "YES\n";
-        for(int i : res){
-            if(ans == i)
-                flag = false;
-            if(flag)
-                continue;
-            cout << i + 1 << " ";
-        }
+        if (!visited[i])
+            dfs(i);
     }
 
-    else {
-        cout << "NO\n";
-    }
+    cout << "NO";
 
     return 0;
 }
