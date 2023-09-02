@@ -2,7 +2,6 @@
 #include <stdlib.h>
 #include <math.h>
 
-
 void merge(int *A, int *B, int l, int r, int c) {
     int i, j, k;
 
@@ -15,7 +14,7 @@ void merge(int *A, int *B, int l, int r, int c) {
 
     while (i <= c)
         B[k++] = A[i++];
-    while ( j <= r)
+    while (j <= r)
         B[k++] = A[j++];
 
     for (k = l; k <= r; k++)
@@ -43,10 +42,12 @@ void merge_sort(int *A, int N) {
 int findTheDistanceValue(int* arr1, int arr1Size, int* arr2, int arr2Size, int d) {
     int count = 0;
     merge_sort(arr2, arr2Size);
+    
+    // qsort(arr2, arr2Size, sizeof(arr2[0]), less);
    
     for (int i = 0; i < arr1Size; i++) {
         int l = 0, r = arr2Size - 1;
-        while(l <= r){
+        while(l <= r) {
             int c = (l + r) / 2;
             if (abs(arr1[i] - arr2[c]) <= d) {
                 count++;
@@ -61,14 +62,16 @@ int findTheDistanceValue(int* arr1, int arr1Size, int* arr2, int arr2Size, int d
     return arr1Size - count;
 }
 
-
-int main(){
+#ifdef TEST
+int main() {
     int arr1Size, arr2Size, d, x;
     scanf("%d", &arr1Size);
     scanf("%d", &arr2Size);
     scanf("%d", &d);
+
     int *arr1 = (int*)malloc(arr1Size * sizeof(int));
     int *arr2 = (int*)malloc(arr2Size * sizeof(int));
+    
     for (int i = 0; i < arr1Size; ++i){
         scanf("%d", &x);
         arr1[i] = x;
@@ -81,3 +84,4 @@ int main(){
     printf("%d", findTheDistanceValue(arr1, arr1Size, arr2, arr2Size, d));
     return 0;
 }
+#endif
